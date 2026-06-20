@@ -10,35 +10,24 @@ body{background:#0f172a;font-family:'Inter',system-ui,sans-serif;color:#f8fafc;m
 input[type=number]{-moz-appearance:textfield}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
-
 .app{max-width:480px;margin:0 auto;padding:16px}
-
-/* HEADER */
 .header{display:flex;justify-content:space-between;align-items:flex-start;
   padding-bottom:16px;margin-bottom:20px;border-bottom:1px solid #1e293b}
 .header-label{font-size:10px;letter-spacing:3px;color:#475569;margin-bottom:4px}
 .header-title{font-size:20px;font-weight:700}
 .badge{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;white-space:nowrap}
-.saved-ok{font-size:10px;color:#34d399;text-align:right;margin-top:4px;height:14px}
-
-/* TABS */
+.saved-ok{font-size:10px;color:#34d399;text-align:right;margin-top:4px;height:14px;transition:opacity .3s}
 .tabs{display:flex;gap:8px;margin-bottom:16px}
-.tab-btn{flex:1;padding:10px 4px;border-radius:10px;cursor:pointer;
-  font-size:12px;font-family:inherit;border:1px solid #1e293b;
-  background:#1e293b;color:#64748b;font-weight:400}
+.tab-btn{flex:1;padding:10px 4px;border-radius:10px;cursor:pointer;font-size:12px;
+  font-family:inherit;border:1px solid #1e293b;background:#1e293b;color:#64748b;font-weight:400}
 .tab-btn.active{border-color:#3b82f6;background:#172554;color:#93c5fd;font-weight:700}
 .sub-tabs{display:flex;gap:8px;margin-bottom:12px}
-.sub-tab-btn{flex:1;padding:9px 4px;border-radius:10px;cursor:pointer;
-  font-size:12px;font-family:inherit;border:1px solid #1e293b;
-  background:#1e293b;color:#64748b;font-weight:400}
+.sub-tab-btn{flex:1;padding:9px 4px;border-radius:10px;cursor:pointer;font-size:12px;
+  font-family:inherit;border:1px solid #1e293b;background:#1e293b;color:#64748b;font-weight:400}
 .sub-tab-btn.active{border-color:#6366f1;background:#1e1b4b;color:#a5b4fc;font-weight:700}
-
-/* CARDS */
 .card{background:#1e293b;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #334155}
 .card-label{font-size:11px;letter-spacing:1.5px;color:#64748b;margin-bottom:10px;text-transform:uppercase}
 .sub-text{font-size:12px;color:#475569;margin-top:6px}
-
-/* INPUTS */
 .input-row{display:flex;align-items:center;gap:4px}
 .input-prefix{font-size:28px;font-weight:800;color:#34d399}
 .big-input{background:transparent;border:none;outline:none;font-size:34px;
@@ -48,43 +37,31 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   width:150px;outline:none;font-family:inherit;text-align:right}
 .edit-val{color:#e2e8f0;font-weight:700;font-size:14px;cursor:pointer;
   padding:4px 8px;border-radius:8px;background:#0f172a;border:1px solid #334155}
-
-/* BAR */
 .bar-wrap{display:flex;height:20px;border-radius:10px;overflow:hidden;margin-bottom:14px;gap:2px}
 .bar-seg{min-width:4px;border-radius:4px;transition:width .5s}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#94a3b8}
 .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
-/* GRID */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .mini-card{border-radius:14px;padding:14px}
 .mini-label{font-size:10px;color:#64748b;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
 .mini-val{font-size:20px;font-weight:800;margin-bottom:2px}
 .mini-sub{font-size:11px;color:#475569}
-
-/* DEUDA TOTAL */
-.deuda-total-card{background:#1a1033;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #6366f133}
 .progress-bar-wrap{height:10px;background:#0f172a;border-radius:6px;overflow:hidden}
 .progress-bar-fill{height:100%;border-radius:6px;transition:width .6s}
-
-/* KEY NUMBER */
-.key-card{border-radius:14px;padding:28px 20px;margin-bottom:12px;text-align:center}
+.key-card{border-radius:14px;padding:24px 20px;margin-bottom:12px;text-align:center}
 .key-label{font-size:11px;color:#94a3b8;margin-bottom:8px;letter-spacing:2px}
 .key-number{font-size:44px;font-weight:800;line-height:1;margin-bottom:6px}
-.key-sub{font-size:13px;color:#94a3b8}
+.key-sub{font-size:13px;color:#94a3b8;margin-bottom:16px}
+.split-row{display:flex;gap:8px;margin-top:4px}
+.split-box{flex:1;border-radius:10px;padding:12px;text-align:center}
+.split-label{font-size:10px;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
+.split-val{font-size:18px;font-weight:800}
 .alert-box{margin-top:14px;padding:10px 14px;border-radius:10px;font-size:13px}
-
-/* LINE ITEMS */
-.line-item{display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;font-size:14px}
+.line-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:14px}
 .divider{border-top:1px solid #334155;margin:4px 0}
-
-/* EDIT ROWS */
 .edit-row{display:flex;align-items:center;gap:12px;background:#1e293b;
   border-radius:12px;padding:14px 16px;margin-bottom:8px;border:1px solid #334155}
-
-/* DEBT CARDS */
 .debt-card{background:#1e293b;border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid #334155}
 .debt-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .debt-name{color:#f1f5f9;font-weight:700;font-size:15px;flex:1}
@@ -94,18 +71,10 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 .debt-saldo-btn{font-size:18px;font-weight:800;cursor:pointer;padding:2px 8px;border-radius:8px}
 .debt-progress-wrap{height:8px;background:#0f172a;border-radius:6px;overflow:hidden}
 .debt-footer{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:#475569}
-
-/* TOTALS */
-.total-card-green{background:#1e3a2f;border:1px solid #10b981;border-radius:14px;
-  padding:16px;text-align:right;margin-bottom:12px}
-.total-card-red{background:#450a0a;border:1px solid #ef4444;border-radius:14px;
-  padding:16px;text-align:right;margin-bottom:12px}
-.total-card-purple{background:#1a1033;border:1px solid #6366f1;border-radius:14px;
-  padding:16px;margin-bottom:12px}
-.info-card{background:#172554;border:1px solid #3b82f6;border-radius:14px;
-  padding:16px;font-size:13px;color:#93c5fd;line-height:1.7;margin-bottom:12px}
-
-/* HIDDEN */
+.total-card-green{background:#1e3a2f;border:1px solid #10b981;border-radius:14px;padding:16px;text-align:right;margin-bottom:12px}
+.total-card-red{background:#450a0a;border:1px solid #ef4444;border-radius:14px;padding:16px;text-align:right;margin-bottom:12px}
+.total-card-purple{background:#1a1033;border:1px solid #6366f1;border-radius:14px;padding:16px;margin-bottom:12px}
+.info-card{background:#172554;border:1px solid #3b82f6;border-radius:14px;padding:16px;font-size:13px;color:#93c5fd;line-height:1.7;margin-bottom:12px}
 .hidden{display:none}
 </style>
 </head>
@@ -134,6 +103,7 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   <!-- ═══ DASHBOARD ═══ -->
   <div id="tab-dashboard">
 
+    <!-- Solo ingresa la quincena -->
     <div class="card">
       <div class="card-label">¿Cuánto te pagaron esta quincena?</div>
       <div class="input-row">
@@ -143,12 +113,14 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
       <div class="sub-text">Ingreso mensual estimado: <strong id="ingreso-mes" style="color:#10b981"></strong></div>
     </div>
 
+    <!-- Barra visual -->
     <div class="card">
       <div class="card-label">¿A dónde va tu quincena?</div>
       <div class="bar-wrap" id="bar-wrap"></div>
       <div class="legend" id="legend"></div>
     </div>
 
+    <!-- Mini cards -->
     <div class="grid2">
       <div class="mini-card" style="background:#1e293b;border:1px solid #64748b33">
         <div class="mini-label">Gastos / quincena</div>
@@ -162,40 +134,48 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
       </div>
     </div>
 
-    <div class="deuda-total-card">
+    <!-- Deuda total -->
+    <div style="background:#1a1033;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #6366f133">
       <div class="card-label">Deuda total restante</div>
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px">
         <div>
           <div id="saldo-total-actual" style="font-size:26px;font-weight:800;color:#f87171"></div>
-          <div id="saldo-total-inicial-sub" style="font-size:12px;color:#64748b"></div>
+          <div id="saldo-total-sub" style="font-size:12px;color:#64748b"></div>
         </div>
         <div style="text-align:right">
-          <div id="pct-pagado-total" style="font-size:18px;font-weight:700;color:#818cf8"></div>
-          <div id="total-pagado-sub" style="font-size:12px;color:#64748b"></div>
+          <div id="pct-pagado" style="font-size:18px;font-weight:700;color:#818cf8"></div>
+          <div id="pagado-sub" style="font-size:12px;color:#64748b"></div>
         </div>
       </div>
       <div class="progress-bar-wrap">
-        <div id="progress-total" class="progress-bar-fill"
-          style="background:linear-gradient(90deg,#6366f1,#a78bfa);width:0%"></div>
+        <div id="progress-total" class="progress-bar-fill" style="background:linear-gradient(90deg,#6366f1,#a78bfa);width:0%"></div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-label">Ahorro emprendimiento (quincenal)</div>
-      <div class="input-row">
-        <span class="input-prefix">$</span>
-        <input class="big-input" type="number" id="ahorro" value="100000" oninput="recalc()"/>
-      </div>
-    </div>
-
-    <!-- NÚMERO CLAVE -->
+    <!-- NÚMERO CLAVE — calculado automáticamente -->
     <div class="key-card" id="key-card">
-      <div class="key-label">SEPARAR A CUENTA DE AHORRO / COLCHÓN</div>
+      <div class="key-label">LO QUE DEBES SEPARAR ESTA QUINCENA</div>
       <div class="key-number" id="key-number"></div>
-      <div class="key-sub">por quincena</div>
+      <div class="key-sub" id="key-sub"></div>
+
+      <!-- Desglose sugerido -->
+      <div class="split-row" id="split-row">
+        <div class="split-box" style="background:#06402b;border:1px solid #10b981">
+          <div class="split-label" style="color:#6ee7b7">🛡️ COLCHÓN</div>
+          <div class="split-val" id="split-colchon" style="color:#34d399"></div>
+          <div style="font-size:10px;color:#6ee7b7;margin-top:3px">emergencias</div>
+        </div>
+        <div class="split-box" style="background:#172554;border:1px solid #3b82f6">
+          <div class="split-label" style="color:#93c5fd">🚀 EMPRENDIMIENTO</div>
+          <div class="split-val" id="split-empren" style="color:#60a5fa"></div>
+          <div style="font-size:10px;color:#93c5fd;margin-top:3px">tu negocio</div>
+        </div>
+      </div>
+
       <div class="alert-box hidden" id="alert-box"></div>
     </div>
 
+    <!-- Resumen mensual -->
     <div class="card">
       <div class="card-label">Resumen mensual (2 quincenas)</div>
       <div class="line-item">
@@ -210,14 +190,10 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
         <span style="color:#94a3b8">Cuotas deudas</span>
         <span id="res-cuotas" style="color:#fca5a5;font-weight:600"></span>
       </div>
-      <div class="line-item">
-        <span style="color:#94a3b8">Ahorro emprendimiento</span>
-        <span id="res-ahorro" style="color:#6ee7b7;font-weight:600"></span>
-      </div>
       <div class="divider"></div>
       <div class="line-item">
-        <span style="color:#f8fafc;font-weight:700;font-size:15px">Disponible libre</span>
-        <span id="res-disponible" style="font-weight:800;font-size:17px"></span>
+        <span style="color:#f8fafc;font-weight:700;font-size:15px">Total a separar</span>
+        <span id="res-separar" style="font-weight:800;font-size:17px;color:#34d399"></span>
       </div>
     </div>
   </div>
@@ -243,7 +219,6 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
       <button class="sub-tab-btn" onclick="switchDeudaTab('cuotas')">💸 Cuotas mensuales</button>
     </div>
 
-    <!-- Saldos -->
     <div id="deuda-saldos">
       <div class="card" style="margin-bottom:8px;background:#1a1033;border:1px solid #6366f133">
         <div class="card-label">Saldo actual por banco</div>
@@ -256,8 +231,7 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
           <div id="pct-total-deuda" style="font-size:11px;color:#818cf8"></div>
         </div>
         <div class="progress-bar-wrap" style="margin-bottom:12px">
-          <div id="progress-total-2" class="progress-bar-fill"
-            style="background:linear-gradient(90deg,#6366f1,#a78bfa);width:0%"></div>
+          <div id="progress-total-2" class="progress-bar-fill" style="background:linear-gradient(90deg,#6366f1,#a78bfa);width:0%"></div>
         </div>
         <div style="display:flex;justify-content:space-between">
           <div>
@@ -272,7 +246,6 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
       </div>
     </div>
 
-    <!-- Cuotas -->
     <div id="deuda-cuotas" class="hidden">
       <div class="card" style="margin-bottom:8px">
         <div class="card-label">Cuota mensual por banco</div>
@@ -285,291 +258,251 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
         <div id="total-cuotas-bi" style="font-size:12px;color:#fca5a5"></div>
       </div>
       <div class="info-card">
-        💡 <strong>Recuerda:</strong> cuando refinancies un banco, actualiza su cuota aquí.
-        El número de ahorro en Resumen se recalcula automáticamente.
+        💡 <strong>Recuerda:</strong> cuando refinancies un banco actualiza su cuota aquí.
+        El cálculo de ahorro en Resumen se actualiza solo.
       </div>
     </div>
   </div>
 
-</div><!-- /app -->
+</div>
 
 <script>
-// ─── ESTADO ───────────────────────────────────────────────
-const KEY = "cf_data_v2";
+const KEY = "cf_data_v3";
+const $ = id => document.getElementById(id);
+const fmt = n => "$" + Math.round(n).toLocaleString("es-CO");
+const pct = (a,b) => b===0?0:Math.min(100,Math.round(((b-a)/b)*100));
 
 const defaultGastos = [
-  {id:1, nombre:"Arriendo + Servicios",   monto:1800000},
-  {id:2, nombre:"Alimentación / Mercado", monto:300000},
-  {id:3, nombre:"Jardín del niño",        monto:500000},
-  {id:4, nombre:"Combustible",            monto:100000},
-  {id:5, nombre:"Rodamiento",             monto:50000},
-  {id:6, nombre:"Plan celulares",         monto:200000},
+  {id:1,nombre:"Arriendo + Servicios",   monto:1800000},
+  {id:2,nombre:"Alimentación / Mercado", monto:300000},
+  {id:3,nombre:"Jardín del niño",        monto:500000},
+  {id:4,nombre:"Combustible",            monto:100000},
+  {id:5,nombre:"Rodamiento",             monto:50000},
+  {id:6,nombre:"Plan celulares",         monto:200000},
 ];
-
 const defaultDeudas = [
-  {id:1, nombre:"Banco Nu",        cuota:140000, saldoInicial:8900000, saldoActual:8900000, color:"#6366f1"},
-  {id:2, nombre:"Davivienda",      cuota:70000,  saldoInicial:2200000, saldoActual:2200000, color:"#f59e0b"},
-  {id:3, nombre:"Bancolombia",     cuota:80000,  saldoInicial:2000000, saldoActual:2000000, color:"#10b981"},
-  {id:4, nombre:"Sumas Pay",       cuota:100000, saldoInicial:580000,  saldoActual:580000,  color:"#ef4444"},
-  {id:5, nombre:"Banco Occidente", cuota:130000, saldoInicial:5200000, saldoActual:5200000, color:"#8b5cf6"},
+  {id:1,nombre:"Banco Nu",        cuota:140000,saldoInicial:8900000,saldoActual:8900000,color:"#6366f1"},
+  {id:2,nombre:"Davivienda",      cuota:70000, saldoInicial:2200000,saldoActual:2200000,color:"#f59e0b"},
+  {id:3,nombre:"Bancolombia",     cuota:80000, saldoInicial:2000000,saldoActual:2000000,color:"#10b981"},
+  {id:4,nombre:"Sumas Pay",       cuota:100000,saldoInicial:580000, saldoActual:580000, color:"#ef4444"},
+  {id:5,nombre:"Banco Occidente", cuota:130000,saldoInicial:5200000,saldoActual:5200000,color:"#8b5cf6"},
 ];
 
-let saved = {};
-try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){}
-
-let gastos  = saved.gastos  || JSON.parse(JSON.stringify(defaultGastos));
-let deudas  = saved.deudas  || JSON.parse(JSON.stringify(defaultDeudas));
-
-// ─── HELPERS ──────────────────────────────────────────────
-const fmt = n => "$" + Math.round(n).toLocaleString("es-CO");
-const pct = (a,b) => b===0 ? 0 : Math.min(100, Math.round(((b-a)/b)*100));
-const $ = id => document.getElementById(id);
+let saved={};
+try{saved=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){}
+let gastos = saved.gastos || JSON.parse(JSON.stringify(defaultGastos));
+let deudas = saved.deudas || JSON.parse(JSON.stringify(defaultDeudas));
 
 function save(){
-  const q = Number($("quincena").value);
-  const a = Number($("ahorro").value);
-  localStorage.setItem(KEY, JSON.stringify({gastos, deudas, quincena:q, ahorro:a}));
+  localStorage.setItem(KEY,JSON.stringify({
+    gastos,deudas,quincena:Number($("quincena").value)
+  }));
   $("saved-ok").classList.remove("hidden");
-  setTimeout(() => $("saved-ok").classList.add("hidden"), 1500);
+  setTimeout(()=>$("saved-ok").classList.add("hidden"),1500);
 }
 
-// ─── TABS ─────────────────────────────────────────────────
-let currentTab = "dashboard";
 function switchTab(t){
-  ["dashboard","gastos","deudas"].forEach(x=>{
-    $(`tab-${x}`).classList.toggle("hidden", x!==t);
-  });
-  document.querySelectorAll(".tab-btn").forEach((b,i)=>{
-    b.classList.toggle("active", ["dashboard","gastos","deudas"][i]===t);
-  });
-  currentTab = t;
+  ["dashboard","gastos","deudas"].forEach(x=>
+    $(`tab-${x}`).classList.toggle("hidden",x!==t));
+  document.querySelectorAll(".tab-btn").forEach((b,i)=>
+    b.classList.toggle("active",["dashboard","gastos","deudas"][i]===t));
   if(t==="gastos") renderGastos();
   if(t==="deudas") renderDeudas();
 }
-
-let currentDeudaTab = "saldos";
 function switchDeudaTab(t){
-  $("deuda-saldos").classList.toggle("hidden", t!=="saldos");
-  $("deuda-cuotas").classList.toggle("hidden", t!=="cuotas");
-  document.querySelectorAll(".sub-tab-btn").forEach((b,i)=>{
-    b.classList.toggle("active", ["saldos","cuotas"][i]===t);
-  });
-  currentDeudaTab = t;
+  $("deuda-saldos").classList.toggle("hidden",t!=="saldos");
+  $("deuda-cuotas").classList.toggle("hidden",t!=="cuotas");
+  document.querySelectorAll(".sub-tab-btn").forEach((b,i)=>
+    b.classList.toggle("active",["saldos","cuotas"][i]===t));
 }
 
-// ─── RECALC DASHBOARD ─────────────────────────────────────
 function recalc(){
-  const q = Number($("quincena").value) || 0;
-  const a = Number($("ahorro").value)   || 0;
-  const tG = gastos.reduce((s,g)=>s+g.monto,0);
-  const tC = deudas.reduce((s,d)=>s+d.cuota,0);
-  const tSA= deudas.reduce((s,d)=>s+d.saldoActual,0);
-  const tSI= deudas.reduce((s,d)=>s+d.saldoInicial,0);
+  const q   = Number($("quincena").value)||0;
+  const tG  = gastos.reduce((s,g)=>s+g.monto,0);
+  const tC  = deudas.reduce((s,d)=>s+d.cuota,0);
+  const tSA = deudas.reduce((s,d)=>s+d.saldoActual,0);
+  const tSI = deudas.reduce((s,d)=>s+d.saldoInicial,0);
   const pagado = tSI - tSA;
 
-  const gBi = tG/2, cBi = tC/2;
-  const dispBi  = q - gBi - cBi - a;
-  const dispMes = q*2 - tG - tC - a*2;
-  const saludP  = q>0 ? Math.min(100,Math.max(0,(dispBi/q)*100)) : 0;
+  const gBi   = tG / 2;
+  const cBi   = tC / 2;
+  const separar = q - gBi - cBi; // ← calculado automáticamente
 
-  // Salud badge
+  // Salud
+  const saludP = q>0 ? Math.min(100,Math.max(0,(separar/q)*100)) : 0;
   let sc="#10b981", sl="✅ Saludable";
-  if(saludP<20){sc="#f59e0b"; sl="⚠️ Ajustado";}
-  if(saludP<10){sc="#ef4444"; sl="🔴 Crítico";}
+  if(saludP<20){sc="#f59e0b";sl="⚠️ Ajustado";}
+  if(saludP<10){sc="#ef4444";sl="🔴 Crítico";}
+  if(separar<=0){sc="#ef4444";sl="🔴 Crítico";}
   const badge=$("salud-badge");
-  badge.textContent=sl;
-  badge.style.background=sc+"22";
-  badge.style.border=`1px solid ${sc}`;
-  badge.style.color=sc;
+  badge.textContent=sl; badge.style.background=sc+"22";
+  badge.style.border=`1px solid ${sc}`; badge.style.color=sc;
 
-  // Header
   $("ingreso-mes").textContent = fmt(q*2);
 
-  // Bar
+  // Barra
   const segs=[
-    {label:"Gastos", val:gBi,             color:"#64748b"},
-    {label:"Deudas", val:cBi,             color:"#ef4444"},
-    {label:"Ahorro", val:a,               color:"#10b981"},
-    {label:"Libre",  val:Math.max(0,dispBi), color:"#3b82f6"},
+    {label:"Gastos", val:gBi,              color:"#64748b"},
+    {label:"Deudas", val:cBi,              color:"#ef4444"},
+    {label:"Separar",val:Math.max(0,separar),color:"#10b981"},
   ];
-  const tot = segs.reduce((s,x)=>s+x.val,0)||1;
-  $("bar-wrap").innerHTML = segs.map(sg=>
+  if(separar<0) segs.push({label:"Falta",val:Math.abs(separar),color:"#7f1d1d"});
+  const tot=segs.reduce((s,x)=>s+x.val,0)||1;
+  $("bar-wrap").innerHTML=segs.map(sg=>
     `<div class="bar-seg" style="background:${sg.color};width:${(sg.val/tot)*100}%"></div>`
   ).join("");
-  $("legend").innerHTML = segs.map(sg=>
+  $("legend").innerHTML=segs.map(sg=>
     `<div class="legend-item"><div class="dot" style="background:${sg.color}"></div>${sg.label} <strong>${fmt(sg.val)}</strong></div>`
   ).join("");
 
   // Mini cards
-  $("gastos-bi").textContent  = fmt(gBi);
-  $("gastos-mes-sub").textContent = `de ${fmt(tG)}/mes`;
-  $("cuotas-bi").textContent  = fmt(cBi);
-  $("cuotas-mes-sub").textContent = `de ${fmt(tC)}/mes`;
+  $("gastos-bi").textContent=fmt(gBi);
+  $("gastos-mes-sub").textContent=`de ${fmt(tG)}/mes`;
+  $("cuotas-bi").textContent=fmt(cBi);
+  $("cuotas-mes-sub").textContent=`de ${fmt(tC)}/mes`;
 
   // Deuda total
-  const pp = pct(tSA, tSI);
-  $("saldo-total-actual").textContent      = fmt(tSA);
-  $("saldo-total-inicial-sub").textContent = `de ${fmt(tSI)} iniciales`;
-  $("pct-pagado-total").textContent        = `${pp}% pagado`;
-  $("total-pagado-sub").textContent        = `ahorrado: ${fmt(pagado)}`;
-  $("progress-total").style.width          = pp+"%";
+  const pp=pct(tSA,tSI);
+  $("saldo-total-actual").textContent=fmt(tSA);
+  $("saldo-total-sub").textContent=`de ${fmt(tSI)} iniciales`;
+  $("pct-pagado").textContent=`${pp}% pagado`;
+  $("pagado-sub").textContent=`ahorrado: ${fmt(pagado)}`;
+  $("progress-total").style.width=pp+"%";
 
-  // Key number
-  const kc=$("key-card"), kn=$("key-number"), ab=$("alert-box");
-  if(dispBi>0){
+  // NÚMERO CLAVE
+  const kc=$("key-card"), kn=$("key-number"), ks=$("key-sub"), ab=$("alert-box"), sr=$("split-row");
+
+  if(separar>0){
     kc.style.background="#064e3b"; kc.style.border="2px solid #10b981";
     kn.style.color="#34d399";
+    kn.textContent=fmt(separar);
+    ks.textContent="esta quincena";
+    // Desglose: 40% colchón, 60% emprendimiento
+    const colchon  = Math.round(separar * 0.40);
+    const empren   = separar - colchon;
+    $("split-colchon").textContent = fmt(colchon);
+    $("split-empren").textContent  = fmt(empren);
+    sr.classList.remove("hidden");
+    ab.classList.add("hidden");
+  } else if(separar===0){
+    kc.style.background="#172554"; kc.style.border="2px solid #f59e0b";
+    kn.style.color="#fcd34d"; kn.textContent="$0";
+    ks.textContent="esta quincena queda justo";
+    sr.classList.add("hidden");
+    ab.classList.add("hidden");
   } else {
     kc.style.background="#450a0a"; kc.style.border="2px solid #ef4444";
-    kn.style.color="#f87171";
-  }
-  kn.textContent = fmt(Math.abs(dispBi));
-  ab.classList.add("hidden");
-  if(dispBi<0){
+    kn.style.color="#f87171"; kn.textContent=fmt(Math.abs(separar));
+    ks.textContent="te falta esta quincena";
+    sr.classList.add("hidden");
     ab.classList.remove("hidden");
     ab.style.background="#7f1d1d55"; ab.style.color="#fca5a5";
-    ab.textContent="⚠️ Esta quincena no alcanza. Ajusta el ahorro o las cuotas.";
-  } else if(dispBi<100000){
-    ab.classList.remove("hidden");
-    ab.style.background="#78350f55"; ab.style.color="#fcd34d";
-    ab.textContent="⚠️ Margen muy bajo. Considera reducir el ahorro.";
+    ab.textContent=`⚠️ Los gastos superan la quincena en ${fmt(Math.abs(separar))}. Revisa tus gastos o cuotas en las otras pestañas.`;
   }
 
   // Resumen
-  $("res-ingresos").textContent = fmt(q*2);
-  $("res-gastos").textContent   = `- ${fmt(tG)}`;
-  $("res-cuotas").textContent   = `- ${fmt(tC)}`;
-  $("res-ahorro").textContent   = `- ${fmt(a*2)}`;
-  $("res-disponible").textContent = (dispMes<0?"- ":"")+fmt(Math.abs(dispMes));
-  $("res-disponible").style.color = dispMes>=0?"#34d399":"#f87171";
+  $("res-ingresos").textContent=fmt(q*2);
+  $("res-gastos").textContent=`- ${fmt(tG)}`;
+  $("res-cuotas").textContent=`- ${fmt(tC)}`;
+  $("res-separar").textContent=(separar<0?"- ":"")+fmt(Math.abs(separar*2));
+  $("res-separar").style.color=separar>=0?"#34d399":"#f87171";
 
   save();
 }
 
-// ─── GASTOS ───────────────────────────────────────────────
+// ─── GASTOS ───
 function renderGastos(){
-  const total = gastos.reduce((s,g)=>s+g.monto,0);
-  $("gastos-list").innerHTML = gastos.map(g=>`
+  const total=gastos.reduce((s,g)=>s+g.monto,0);
+  $("gastos-list").innerHTML=gastos.map(g=>`
     <div class="edit-row">
       <span style="color:#cbd5e1;font-size:14px;flex:1">${g.nombre}</span>
-      <span class="edit-val" onclick="editGasto(${g.id})" id="gval-${g.id}">${fmt(g.monto)} ✏️</span>
-    </div>
-  `).join("");
-  $("total-gastos-val").textContent = fmt(total);
-  $("total-gastos-bi").textContent  = `Quincenal: ${fmt(total/2)}`;
+      <span class="edit-val" id="gval-${g.id}" onclick="editGasto(${g.id})">${fmt(g.monto)} ✏️</span>
+    </div>`).join("");
+  $("total-gastos-val").textContent=fmt(total);
+  $("total-gastos-bi").textContent=`Quincenal: ${fmt(total/2)}`;
 }
-
 function editGasto(id){
-  const g = gastos.find(x=>x.id===id);
-  const el = $(`gval-${id}`);
-  el.outerHTML = `<input class="inline-input" id="ginput-${id}" type="number" value="${g.monto}"
+  const g=gastos.find(x=>x.id===id);
+  $(`gval-${id}`).outerHTML=`<input class="inline-input" id="ginput-${id}" type="number" value="${g.monto}"
     onblur="saveGasto(${id})" onkeydown="if(event.key==='Enter')this.blur()"/>`;
-  setTimeout(()=>{ const i=$(`ginput-${id}`); if(i){i.focus();i.select();} },10);
+  setTimeout(()=>{const i=$(`ginput-${id}`);if(i){i.focus();i.select();}},10);
 }
-
 function saveGasto(id){
-  const el = $(`ginput-${id}`);
-  if(!el) return;
-  gastos = gastos.map(g=>g.id===id?{...g,monto:Number(el.value)||0}:g);
-  renderGastos();
-  recalc();
+  const el=$(`ginput-${id}`);if(!el)return;
+  gastos=gastos.map(g=>g.id===id?{...g,monto:Number(el.value)||0}:g);
+  renderGastos();recalc();
 }
 
-// ─── DEUDAS ───────────────────────────────────────────────
+// ─── DEUDAS ───
 function renderDeudas(){
-  const tSA = deudas.reduce((s,d)=>s+d.saldoActual,0);
-  const tSI = deudas.reduce((s,d)=>s+d.saldoInicial,0);
-  const tC  = deudas.reduce((s,d)=>s+d.cuota,0);
-  const pag = tSI-tSA;
-  const pp  = pct(tSA,tSI);
+  const tSA=deudas.reduce((s,d)=>s+d.saldoActual,0);
+  const tSI=deudas.reduce((s,d)=>s+d.saldoInicial,0);
+  const tC=deudas.reduce((s,d)=>s+d.cuota,0);
+  const pag=tSI-tSA; const pp=pct(tSA,tSI);
 
-  // SALDOS
-  $("saldos-list").innerHTML = deudas.map(d=>{
+  $("saldos-list").innerHTML=deudas.map(d=>{
     const p=pct(d.saldoActual,d.saldoInicial);
-    return `
-    <div class="debt-card">
+    return `<div class="debt-card">
       <div class="debt-header">
         <div class="dot" style="background:${d.color}"></div>
         <div class="debt-name">${d.nombre}</div>
-        <div class="debt-pct-badge" style="color:${d.color};background:${d.color}22;border:1px solid ${d.color}44">
-          ${p}% pagado
-        </div>
+        <div class="debt-pct-badge" style="color:${d.color};background:${d.color}22;border:1px solid ${d.color}44">${p}% pagado</div>
       </div>
       <div class="debt-values">
-        <div>
-          <div class="debt-val-label">SALDO INICIAL</div>
-          <div style="font-size:14px;color:#64748b;font-weight:600">${fmt(d.saldoInicial)}</div>
-        </div>
-        <div style="text-align:right">
-          <div class="debt-val-label" style="color:#94a3b8">SALDO ACTUAL</div>
+        <div><div class="debt-val-label">SALDO INICIAL</div>
+          <div style="font-size:14px;color:#64748b;font-weight:600">${fmt(d.saldoInicial)}</div></div>
+        <div style="text-align:right"><div class="debt-val-label" style="color:#94a3b8">SALDO ACTUAL</div>
           <div class="debt-saldo-btn" id="sval-${d.id}"
             style="color:${d.color};background:${d.color}11;border:1px solid ${d.color}33"
-            onclick="editSaldo(${d.id})">${fmt(d.saldoActual)} ✏️</div>
-        </div>
+            onclick="editSaldo(${d.id})">${fmt(d.saldoActual)} ✏️</div></div>
       </div>
       <div class="debt-progress-wrap">
-        <div class="progress-bar-fill" style="background:${d.color};width:${p}%"></div>
-      </div>
+        <div class="progress-bar-fill" style="background:${d.color};width:${p}%"></div></div>
       <div class="debt-footer">
         <span>Pagado: <span style="color:#34d399;font-weight:600">${fmt(d.saldoInicial-d.saldoActual)}</span></span>
         <span>Faltan: <span style="color:${d.color};font-weight:600">${fmt(d.saldoActual)}</span></span>
-      </div>
-    </div>`;
+      </div></div>`;
   }).join("");
 
-  $("pct-total-deuda").textContent   = `${pp}% pagado`;
-  $("progress-total-2").style.width  = pp+"%";
-  $("total-pagado-val").textContent  = fmt(pag);
-  $("total-pendiente-val").textContent = fmt(tSA);
+  $("pct-total-deuda").textContent=`${pp}% pagado`;
+  $("progress-total-2").style.width=pp+"%";
+  $("total-pagado-val").textContent=fmt(pag);
+  $("total-pendiente-val").textContent=fmt(tSA);
 
-  // CUOTAS
-  $("cuotas-list").innerHTML = deudas.map(d=>`
+  $("cuotas-list").innerHTML=deudas.map(d=>`
     <div class="edit-row">
       <div class="dot" style="background:${d.color}"></div>
       <span style="color:#cbd5e1;font-size:14px;flex:1">${d.nombre}</span>
       <span class="edit-val" id="cval-${d.id}" onclick="editCuota(${d.id})">${fmt(d.cuota)} ✏️</span>
-    </div>
-  `).join("");
-  $("total-cuotas-val").textContent = fmt(tC);
-  $("total-cuotas-bi").textContent  = `Quincenal: ${fmt(tC/2)}`;
+    </div>`).join("");
+  $("total-cuotas-val").textContent=fmt(tC);
+  $("total-cuotas-bi").textContent=`Quincenal: ${fmt(tC/2)}`;
 }
-
 function editSaldo(id){
   const d=deudas.find(x=>x.id===id);
-  const el=$(`sval-${id}`);
-  el.outerHTML=`<input class="inline-input" id="sinput-${id}" type="number" value="${d.saldoActual}"
+  $(`sval-${id}`).outerHTML=`<input class="inline-input" id="sinput-${id}" type="number" value="${d.saldoActual}"
     style="color:${d.color}" onblur="saveSaldo(${id})" onkeydown="if(event.key==='Enter')this.blur()"/>`;
-  setTimeout(()=>{ const i=$(`sinput-${id}`); if(i){i.focus();i.select();} },10);
+  setTimeout(()=>{const i=$(`sinput-${id}`);if(i){i.focus();i.select();}},10);
 }
-
 function saveSaldo(id){
-  const el=$(`sinput-${id}`);
-  if(!el) return;
+  const el=$(`sinput-${id}`);if(!el)return;
   deudas=deudas.map(d=>d.id===id?{...d,saldoActual:Number(el.value)||0}:d);
-  renderDeudas();
-  recalc();
+  renderDeudas();recalc();
 }
-
 function editCuota(id){
   const d=deudas.find(x=>x.id===id);
-  const el=$(`cval-${id}`);
-  el.outerHTML=`<input class="inline-input" id="cinput-${id}" type="number" value="${d.cuota}"
+  $(`cval-${id}`).outerHTML=`<input class="inline-input" id="cinput-${id}" type="number" value="${d.cuota}"
     onblur="saveCuota(${id})" onkeydown="if(event.key==='Enter')this.blur()"/>`;
-  setTimeout(()=>{ const i=$(`cinput-${id}`); if(i){i.focus();i.select();} },10);
+  setTimeout(()=>{const i=$(`cinput-${id}`);if(i){i.focus();i.select();}},10);
 }
-
 function saveCuota(id){
-  const el=$(`cinput-${id}`);
-  if(!el) return;
+  const el=$(`cinput-${id}`);if(!el)return;
   deudas=deudas.map(d=>d.id===id?{...d,cuota:Number(el.value)||0}:d);
-  renderDeudas();
-  recalc();
+  renderDeudas();recalc();
 }
 
-// ─── INIT ─────────────────────────────────────────────────
-window.onload = function(){
-  if(saved.quincena) $("quincena").value = saved.quincena;
-  if(saved.ahorro)   $("ahorro").value   = saved.ahorro;
+window.onload=function(){
+  if(saved.quincena) $("quincena").value=saved.quincena;
   recalc();
 };
 </script>
