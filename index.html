@@ -1,367 +1,577 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Planificador Quincenal</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0f172a; font-family: 'Inter', system-ui, sans-serif; color: #f8fafc; min-height: 100vh; }
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type=number] { -moz-appearance: textfield; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #1e293b; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Control Financiero</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f172a;font-family:'Inter',system-ui,sans-serif;color:#f8fafc;min-height:100vh}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+
+.app{max-width:480px;margin:0 auto;padding:16px}
+
+/* HEADER */
+.header{display:flex;justify-content:space-between;align-items:flex-start;
+  padding-bottom:16px;margin-bottom:20px;border-bottom:1px solid #1e293b}
+.header-label{font-size:10px;letter-spacing:3px;color:#475569;margin-bottom:4px}
+.header-title{font-size:20px;font-weight:700}
+.badge{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;white-space:nowrap}
+.saved-ok{font-size:10px;color:#34d399;text-align:right;margin-top:4px;height:14px}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:16px}
+.tab-btn{flex:1;padding:10px 4px;border-radius:10px;cursor:pointer;
+  font-size:12px;font-family:inherit;border:1px solid #1e293b;
+  background:#1e293b;color:#64748b;font-weight:400}
+.tab-btn.active{border-color:#3b82f6;background:#172554;color:#93c5fd;font-weight:700}
+.sub-tabs{display:flex;gap:8px;margin-bottom:12px}
+.sub-tab-btn{flex:1;padding:9px 4px;border-radius:10px;cursor:pointer;
+  font-size:12px;font-family:inherit;border:1px solid #1e293b;
+  background:#1e293b;color:#64748b;font-weight:400}
+.sub-tab-btn.active{border-color:#6366f1;background:#1e1b4b;color:#a5b4fc;font-weight:700}
+
+/* CARDS */
+.card{background:#1e293b;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #334155}
+.card-label{font-size:11px;letter-spacing:1.5px;color:#64748b;margin-bottom:10px;text-transform:uppercase}
+.sub-text{font-size:12px;color:#475569;margin-top:6px}
+
+/* INPUTS */
+.input-row{display:flex;align-items:center;gap:4px}
+.input-prefix{font-size:28px;font-weight:800;color:#34d399}
+.big-input{background:transparent;border:none;outline:none;font-size:34px;
+  font-weight:800;color:#34d399;width:100%;font-family:inherit}
+.inline-input{background:#0f172a;border:1px solid #3b82f6;border-radius:8px;
+  color:#34d399;font-weight:700;font-size:14px;padding:4px 8px;
+  width:150px;outline:none;font-family:inherit;text-align:right}
+.edit-val{color:#e2e8f0;font-weight:700;font-size:14px;cursor:pointer;
+  padding:4px 8px;border-radius:8px;background:#0f172a;border:1px solid #334155}
+
+/* BAR */
+.bar-wrap{display:flex;height:20px;border-radius:10px;overflow:hidden;margin-bottom:14px;gap:2px}
+.bar-seg{min-width:4px;border-radius:4px;transition:width .5s}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#94a3b8}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.mini-card{border-radius:14px;padding:14px}
+.mini-label{font-size:10px;color:#64748b;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
+.mini-val{font-size:20px;font-weight:800;margin-bottom:2px}
+.mini-sub{font-size:11px;color:#475569}
+
+/* DEUDA TOTAL */
+.deuda-total-card{background:#1a1033;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #6366f133}
+.progress-bar-wrap{height:10px;background:#0f172a;border-radius:6px;overflow:hidden}
+.progress-bar-fill{height:100%;border-radius:6px;transition:width .6s}
+
+/* KEY NUMBER */
+.key-card{border-radius:14px;padding:28px 20px;margin-bottom:12px;text-align:center}
+.key-label{font-size:11px;color:#94a3b8;margin-bottom:8px;letter-spacing:2px}
+.key-number{font-size:44px;font-weight:800;line-height:1;margin-bottom:6px}
+.key-sub{font-size:13px;color:#94a3b8}
+.alert-box{margin-top:14px;padding:10px 14px;border-radius:10px;font-size:13px}
+
+/* LINE ITEMS */
+.line-item{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;font-size:14px}
+.divider{border-top:1px solid #334155;margin:4px 0}
+
+/* EDIT ROWS */
+.edit-row{display:flex;align-items:center;gap:12px;background:#1e293b;
+  border-radius:12px;padding:14px 16px;margin-bottom:8px;border:1px solid #334155}
+
+/* DEBT CARDS */
+.debt-card{background:#1e293b;border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid #334155}
+.debt-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.debt-name{color:#f1f5f9;font-weight:700;font-size:15px;flex:1}
+.debt-pct-badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+.debt-values{display:flex;justify-content:space-between;margin-bottom:10px}
+.debt-val-label{font-size:10px;color:#64748b;margin-bottom:2px}
+.debt-saldo-btn{font-size:18px;font-weight:800;cursor:pointer;padding:2px 8px;border-radius:8px}
+.debt-progress-wrap{height:8px;background:#0f172a;border-radius:6px;overflow:hidden}
+.debt-footer{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:#475569}
+
+/* TOTALS */
+.total-card-green{background:#1e3a2f;border:1px solid #10b981;border-radius:14px;
+  padding:16px;text-align:right;margin-bottom:12px}
+.total-card-red{background:#450a0a;border:1px solid #ef4444;border-radius:14px;
+  padding:16px;text-align:right;margin-bottom:12px}
+.total-card-purple{background:#1a1033;border:1px solid #6366f1;border-radius:14px;
+  padding:16px;margin-bottom:12px}
+.info-card{background:#172554;border:1px solid #3b82f6;border-radius:14px;
+  padding:16px;font-size:13px;color:#93c5fd;line-height:1.7;margin-bottom:12px}
+
+/* HIDDEN */
+.hidden{display:none}
+</style>
 </head>
 <body>
-<div id="root"></div>
+<div class="app">
 
-<script type="text/babel">
-const { useState, useMemo, useEffect } = React;
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="header-label">PLANIFICADOR QUINCENAL</div>
+      <div class="header-title">Control Financiero</div>
+    </div>
+    <div>
+      <div class="badge" id="salud-badge">✅ Saludable</div>
+      <div class="saved-ok hidden" id="saved-ok">✓ guardado</div>
+    </div>
+  </div>
 
-const STORAGE_KEY = "planificador_data_v1";
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Resumen</button>
+    <button class="tab-btn" onclick="switchTab('gastos')">🏠 Gastos</button>
+    <button class="tab-btn" onclick="switchTab('deudas')">💳 Deudas</button>
+  </div>
 
-const fmt = (n) => "$" + Math.round(n).toLocaleString("es-CO");
-const pct = (a, b) => b === 0 ? 0 : Math.min(100, Math.round(((b - a) / b) * 100));
+  <!-- ═══ DASHBOARD ═══ -->
+  <div id="tab-dashboard">
 
-const DEUDAS_DEFAULT = [
-  { id:1, nombre:"Banco Nu",        cuota:140000, saldoInicial:8900000, saldoActual:8900000, color:"#6366f1" },
-  { id:2, nombre:"Davivienda",      cuota:70000,  saldoInicial:2200000, saldoActual:2200000, color:"#f59e0b" },
-  { id:3, nombre:"Bancolombia",     cuota:80000,  saldoInicial:2000000, saldoActual:2000000, color:"#10b981" },
-  { id:4, nombre:"Sumas Pay",       cuota:100000, saldoInicial:580000,  saldoActual:580000,  color:"#ef4444" },
-  { id:5, nombre:"Banco Occidente", cuota:130000, saldoInicial:5200000, saldoActual:5200000, color:"#8b5cf6" },
-];
+    <div class="card">
+      <div class="card-label">¿Cuánto te pagaron esta quincena?</div>
+      <div class="input-row">
+        <span class="input-prefix">$</span>
+        <input class="big-input" type="number" id="quincena" value="1650000" oninput="recalc()"/>
+      </div>
+      <div class="sub-text">Ingreso mensual estimado: <strong id="ingreso-mes" style="color:#10b981"></strong></div>
+    </div>
 
-const GASTOS_DEFAULT = [
-  { id:1, nombre:"Arriendo + Servicios",    monto:1800000 },
-  { id:2, nombre:"Alimentación / Mercado",  monto:300000  },
-  { id:3, nombre:"Jardín del niño",         monto:500000  },
-  { id:4, nombre:"Combustible",             monto:100000  },
-  { id:5, nombre:"Rodamiento",              monto:50000   },
-  { id:6, nombre:"Plan celulares",          monto:200000  },
-];
+    <div class="card">
+      <div class="card-label">¿A dónde va tu quincena?</div>
+      <div class="bar-wrap" id="bar-wrap"></div>
+      <div class="legend" id="legend"></div>
+    </div>
 
-function App() {
-  const saved = (() => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
-  })();
+    <div class="grid2">
+      <div class="mini-card" style="background:#1e293b;border:1px solid #64748b33">
+        <div class="mini-label">Gastos / quincena</div>
+        <div class="mini-val" id="gastos-bi" style="color:#e2e8f0"></div>
+        <div class="mini-sub" id="gastos-mes-sub"></div>
+      </div>
+      <div class="mini-card" style="background:#1e293b;border:1px solid #ef444433">
+        <div class="mini-label">Cuotas / quincena</div>
+        <div class="mini-val" id="cuotas-bi" style="color:#fca5a5"></div>
+        <div class="mini-sub" id="cuotas-mes-sub"></div>
+      </div>
+    </div>
 
-  const [quincena,   setQuincena]   = useState(saved.quincena   || 1650000);
-  const [ahorroMeta, setAhorroMeta] = useState(saved.ahorroMeta || 100000);
-  const [deudas,     setDeudas]     = useState(saved.deudas     || DEUDAS_DEFAULT);
-  const [gastos,     setGastos]     = useState(saved.gastos     || GASTOS_DEFAULT);
-  const [tab,        setTab]        = useState("dashboard");
-  const [deudaTab,   setDeudaTab]   = useState("saldos");
-  const [editando,   setEditando]   = useState(null);
-  const [saved_ok,   setSavedOk]    = useState(false);
-
-  // Persistencia automática
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ quincena, ahorroMeta, deudas, gastos }));
-    setSavedOk(true);
-    const t = setTimeout(() => setSavedOk(false), 1500);
-    return () => clearTimeout(t);
-  }, [quincena, ahorroMeta, deudas, gastos]);
-
-  const totalGastos   = useMemo(() => gastos.reduce((a,g) => a+g.monto, 0), [gastos]);
-  const totalCuotas   = useMemo(() => deudas.reduce((a,d) => a+d.cuota, 0), [deudas]);
-  const totalSaldoAct = useMemo(() => deudas.reduce((a,d) => a+d.saldoActual, 0), [deudas]);
-  const totalSaldoIni = useMemo(() => deudas.reduce((a,d) => a+d.saldoInicial, 0), [deudas]);
-  const totalPagado   = totalSaldoIni - totalSaldoAct;
-
-  const ingresoMes  = quincena * 2;
-  const gastosBi    = totalGastos / 2;
-  const deudasBi    = totalCuotas / 2;
-  const disponiBi   = quincena - gastosBi - deudasBi - ahorroMeta;
-  const disponiMes  = ingresoMes - totalGastos - totalCuotas - ahorroMeta * 2;
-
-  const saludPct   = Math.min(100, Math.max(0, (disponiBi / quincena) * 100));
-  const saludColor = saludPct >= 20 ? "#10b981" : saludPct >= 10 ? "#f59e0b" : "#ef4444";
-  const saludLabel = saludPct >= 20 ? "✅ Saludable" : saludPct >= 10 ? "⚠️ Ajustado" : "🔴 Crítico";
-
-  const segments = [
-    { label:"Gastos", value:gastosBi,                  color:"#64748b" },
-    { label:"Deudas", value:deudasBi,                  color:"#ef4444" },
-    { label:"Ahorro", value:ahorroMeta,                color:"#10b981" },
-    { label:"Libre",  value:Math.max(0, disponiBi),    color:"#3b82f6" },
-  ];
-  const totalBar = segments.reduce((a,s) => a+s.value, 0) || 1;
-
-  const upDeuda = (id, field, val) =>
-    setDeudas(deudas.map(d => d.id===id ? {...d, [field]: Number(val)} : d));
-  const upGasto = (id, val) =>
-    setGastos(gastos.map(g => g.id===id ? {...g, monto: Number(val)} : g));
-
-  const css = {
-    root:       { maxWidth:480, margin:"0 auto", padding:16, minHeight:"100vh" },
-    header:     { display:"flex", justifyContent:"space-between", alignItems:"flex-start",
-                  paddingBottom:16, marginBottom:20, borderBottom:"1px solid #1e293b" },
-    badge:      (c) => ({ fontSize:12, fontWeight:600, padding:"6px 12px", borderRadius:20,
-                  background:c+"22", border:`1px solid ${c}`, color:c, whiteSpace:"nowrap" }),
-    tabs:       { display:"flex", gap:8, marginBottom:16 },
-    tab:        (a) => ({ flex:1, padding:"10px 4px", borderRadius:10, cursor:"pointer", fontSize:12,
-                  fontWeight: a?700:400, border: a?"1px solid #3b82f6":"1px solid #1e293b",
-                  background: a?"#172554":"#1e293b", color: a?"#93c5fd":"#64748b" }),
-    subTab:     (a) => ({ flex:1, padding:"9px 4px", borderRadius:10, cursor:"pointer", fontSize:12,
-                  fontWeight: a?700:400, border: a?"1px solid #6366f1":"1px solid #1e293b",
-                  background: a?"#1e1b4b":"#1e293b", color: a?"#a5b4fc":"#64748b" }),
-    card:       { background:"#1e293b", borderRadius:14, padding:16, marginBottom:12, border:"1px solid #334155" },
-    cardLabel:  { fontSize:11, letterSpacing:1.5, color:"#64748b", marginBottom:10, textTransform:"uppercase" },
-    sub:        { fontSize:12, color:"#475569", marginTop:6 },
-    inputRow:   { display:"flex", alignItems:"center", gap:4 },
-    prefix:     { fontSize:28, fontWeight:800, color:"#34d399" },
-    bigIn:      (c) => ({ background:"transparent", border:"none", outline:"none", fontSize:34,
-                  fontWeight:800, color:c, width:"100%", fontFamily:"inherit" }),
-    barWrap:    { display:"flex", height:20, borderRadius:10, overflow:"hidden", marginBottom:14, gap:2 },
-    barSeg:     (c,w) => ({ background:c, width:`${w}%`, minWidth:4, borderRadius:4, transition:"width .5s" }),
-    legend:     { display:"flex", flexWrap:"wrap", gap:"6px 16px" },
-    lItem:      { display:"flex", alignItems:"center", gap:6 },
-    dot:        (c) => ({ width:10, height:10, borderRadius:"50%", background:c, flexShrink:0 }),
-    g2:         { display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:12 },
-    mCard:      (bg,ac) => ({ background:bg, border:`1px solid ${ac}33`, borderRadius:14, padding:14 }),
-    mLabel:     { fontSize:10, color:"#64748b", letterSpacing:1, marginBottom:6, textTransform:"uppercase" },
-    mVal:       (c) => ({ fontSize:20, fontWeight:800, color:c, marginBottom:2 }),
-    mSub:       { fontSize:11, color:"#475569" },
-    lRow:       { display:"flex", justifyContent:"space-between", alignItems:"center", padding:"8px 0", fontSize:14 },
-    divider:    { borderTop:"1px solid #334155", margin:"4px 0" },
-    editRow:    { display:"flex", alignItems:"center", gap:12, background:"#1e293b", borderRadius:12,
-                  padding:"14px 16px", marginBottom:8, border:"1px solid #334155" },
-    editVal:    { color:"#e2e8f0", fontWeight:700, fontSize:14, cursor:"pointer", padding:"4px 8px",
-                  borderRadius:8, background:"#0f172a", border:"1px solid #334155" },
-    inIn:       (c) => ({ background:"#0f172a", border:"1px solid #3b82f6", borderRadius:8,
-                  color: c||"#34d399", fontWeight:700, fontSize:14, padding:"4px 8px",
-                  width:140, outline:"none", fontFamily:"inherit", textAlign:"right" }),
-  };
-
-  return (
-    <div style={css.root}>
-      {/* HEADER */}
-      <div style={css.header}>
+    <div class="deuda-total-card">
+      <div class="card-label">Deuda total restante</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px">
         <div>
-          <div style={{fontSize:10,letterSpacing:3,color:"#475569",marginBottom:4}}>PLANIFICADOR QUINCENAL</div>
-          <div style={{fontSize:20,fontWeight:700}}>Tu quincena, organizada</div>
+          <div id="saldo-total-actual" style="font-size:26px;font-weight:800;color:#f87171"></div>
+          <div id="saldo-total-inicial-sub" style="font-size:12px;color:#64748b"></div>
         </div>
-        <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:6}}>
-          <div style={css.badge(saludColor)}>{saludLabel}</div>
-          {saved_ok && <div style={{fontSize:10,color:"#34d399"}}>✓ guardado</div>}
+        <div style="text-align:right">
+          <div id="pct-pagado-total" style="font-size:18px;font-weight:700;color:#818cf8"></div>
+          <div id="total-pagado-sub" style="font-size:12px;color:#64748b"></div>
         </div>
       </div>
-
-      {/* TABS */}
-      <div style={css.tabs}>
-        {[["dashboard","📊 Resumen"],["gastos","🏠 Gastos"],["deudas","💳 Deudas"]].map(([t,l]) => (
-          <button key={t} style={css.tab(tab===t)} onClick={()=>setTab(t)}>{l}</button>
-        ))}
+      <div class="progress-bar-wrap">
+        <div id="progress-total" class="progress-bar-fill"
+          style="background:linear-gradient(90deg,#6366f1,#a78bfa);width:0%"></div>
       </div>
+    </div>
 
-      {/* ════ DASHBOARD ════ */}
-      {tab==="dashboard" && <>
-        <div style={css.card}>
-          <div style={css.cardLabel}>¿Cuánto te pagaron esta quincena?</div>
-          <div style={css.inputRow}>
-            <span style={css.prefix}>$</span>
-            <input type="number" value={quincena}
-              onChange={e=>setQuincena(Number(e.target.value))}
-              style={css.bigIn("#34d399")}/>
-          </div>
-          <div style={css.sub}>Ingreso mensual estimado: <strong style={{color:"#10b981"}}>{fmt(ingresoMes)}</strong></div>
+    <div class="card">
+      <div class="card-label">Ahorro emprendimiento (quincenal)</div>
+      <div class="input-row">
+        <span class="input-prefix">$</span>
+        <input class="big-input" type="number" id="ahorro" value="100000" oninput="recalc()"/>
+      </div>
+    </div>
+
+    <!-- NÚMERO CLAVE -->
+    <div class="key-card" id="key-card">
+      <div class="key-label">SEPARAR A CUENTA DE AHORRO / COLCHÓN</div>
+      <div class="key-number" id="key-number"></div>
+      <div class="key-sub">por quincena</div>
+      <div class="alert-box hidden" id="alert-box"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Resumen mensual (2 quincenas)</div>
+      <div class="line-item">
+        <span style="color:#94a3b8">Ingresos totales</span>
+        <span id="res-ingresos" style="color:#34d399;font-weight:600"></span>
+      </div>
+      <div class="line-item">
+        <span style="color:#94a3b8">Gastos fijos</span>
+        <span id="res-gastos" style="color:#e2e8f0;font-weight:600"></span>
+      </div>
+      <div class="line-item">
+        <span style="color:#94a3b8">Cuotas deudas</span>
+        <span id="res-cuotas" style="color:#fca5a5;font-weight:600"></span>
+      </div>
+      <div class="line-item">
+        <span style="color:#94a3b8">Ahorro emprendimiento</span>
+        <span id="res-ahorro" style="color:#6ee7b7;font-weight:600"></span>
+      </div>
+      <div class="divider"></div>
+      <div class="line-item">
+        <span style="color:#f8fafc;font-weight:700;font-size:15px">Disponible libre</span>
+        <span id="res-disponible" style="font-weight:800;font-size:17px"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GASTOS ═══ -->
+  <div id="tab-gastos" class="hidden">
+    <div class="card" style="margin-bottom:8px">
+      <div class="card-label">Gastos fijos mensuales</div>
+      <div class="sub-text">Toca el valor para editarlo</div>
+    </div>
+    <div id="gastos-list"></div>
+    <div class="total-card-green">
+      <div style="font-size:11px;color:#6ee7b7;margin-bottom:4px">TOTAL MENSUAL</div>
+      <div id="total-gastos-val" style="font-size:26px;font-weight:800;color:#34d399"></div>
+      <div id="total-gastos-bi" style="font-size:12px;color:#6ee7b7"></div>
+    </div>
+  </div>
+
+  <!-- ═══ DEUDAS ═══ -->
+  <div id="tab-deudas" class="hidden">
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchDeudaTab('saldos')">📉 Saldos mes a mes</button>
+      <button class="sub-tab-btn" onclick="switchDeudaTab('cuotas')">💸 Cuotas mensuales</button>
+    </div>
+
+    <!-- Saldos -->
+    <div id="deuda-saldos">
+      <div class="card" style="margin-bottom:8px;background:#1a1033;border:1px solid #6366f133">
+        <div class="card-label">Saldo actual por banco</div>
+        <div class="sub-text">Toca el saldo para actualizarlo cada mes 📆</div>
+      </div>
+      <div id="saldos-list"></div>
+      <div class="total-card-purple">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-size:11px;color:#818cf8;letter-spacing:1px">TOTAL DEUDAS</div>
+          <div id="pct-total-deuda" style="font-size:11px;color:#818cf8"></div>
         </div>
-
-        <div style={css.card}>
-          <div style={css.cardLabel}>¿A dónde va tu quincena?</div>
-          <div style={css.barWrap}>
-            {segments.map(sg=>(
-              <div key={sg.label} style={css.barSeg(sg.color,(sg.value/totalBar)*100)}/>
-            ))}
-          </div>
-          <div style={css.legend}>
-            {segments.map(sg=>(
-              <div key={sg.label} style={css.lItem}>
-                <div style={css.dot(sg.color)}/>
-                <span style={{fontSize:12,color:"#94a3b8"}}>{sg.label} <strong>{fmt(sg.value)}</strong></span>
-              </div>
-            ))}
-          </div>
+        <div class="progress-bar-wrap" style="margin-bottom:12px">
+          <div id="progress-total-2" class="progress-bar-fill"
+            style="background:linear-gradient(90deg,#6366f1,#a78bfa);width:0%"></div>
         </div>
-
-        <div style={css.g2}>
-          <div style={css.mCard("#1e293b","#64748b")}>
-            <div style={css.mLabel}>Gastos / quincena</div>
-            <div style={css.mVal("#e2e8f0")}>{fmt(gastosBi)}</div>
-            <div style={css.mSub}>de {fmt(totalGastos)}/mes</div>
+        <div style="display:flex;justify-content:space-between">
+          <div>
+            <div style="font-size:10px;color:#6366f1;margin-bottom:2px">PAGADO</div>
+            <div id="total-pagado-val" style="font-size:20px;font-weight:800;color:#34d399"></div>
           </div>
-          <div style={css.mCard("#1e293b","#ef4444")}>
-            <div style={css.mLabel}>Cuotas / quincena</div>
-            <div style={css.mVal("#fca5a5")}>{fmt(deudasBi)}</div>
-            <div style={css.mSub}>de {fmt(totalCuotas)}/mes</div>
-          </div>
-        </div>
-
-        {/* Deuda total restante */}
-        <div style={{...css.card, background:"#1a1033", border:"1px solid #6366f133"}}>
-          <div style={css.cardLabel}>Deuda total restante</div>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginBottom:10}}>
-            <div>
-              <div style={{fontSize:26,fontWeight:800,color:"#f87171"}}>{fmt(totalSaldoAct)}</div>
-              <div style={{fontSize:12,color:"#64748b"}}>de {fmt(totalSaldoIni)} iniciales</div>
-            </div>
-            <div style={{textAlign:"right"}}>
-              <div style={{fontSize:18,fontWeight:700,color:"#818cf8"}}>{pct(totalSaldoAct,totalSaldoIni)}% pagado</div>
-              <div style={{fontSize:12,color:"#64748b"}}>ahorrado: {fmt(totalPagado)}</div>
-            </div>
-          </div>
-          <div style={{height:10,background:"#0f172a",borderRadius:6,overflow:"hidden"}}>
-            <div style={{height:"100%",width:`${pct(totalSaldoAct,totalSaldoIni)}%`,
-              background:"linear-gradient(90deg,#6366f1,#a78bfa)",borderRadius:6,transition:"width .6s"}}/>
-          </div>
-        </div>
-
-        <div style={css.card}>
-          <div style={css.cardLabel}>Ahorro emprendimiento (quincenal)</div>
-          <div style={css.inputRow}>
-            <span style={css.prefix}>$</span>
-            <input type="number" value={ahorroMeta}
-              onChange={e=>setAhorroMeta(Number(e.target.value))}
-              style={css.bigIn("#34d399")}/>
-          </div>
-        </div>
-
-        {/* NÚMERO CLAVE */}
-        <div style={{...css.card, background:disponiBi>0?"#064e3b":"#450a0a",
-          border:`2px solid ${disponiBi>0?"#10b981":"#ef4444"}`, textAlign:"center", padding:"28px 20px"}}>
-          <div style={{fontSize:11,color:"#94a3b8",marginBottom:8,letterSpacing:2}}>SEPARAR A CUENTA DE AHORRO / COLCHÓN</div>
-          <div style={{fontSize:44,fontWeight:800,color:disponiBi>0?"#34d399":"#f87171",lineHeight:1,marginBottom:6}}>
-            {fmt(Math.abs(disponiBi))}
-          </div>
-          <div style={{fontSize:13,color:"#94a3b8"}}>por quincena</div>
-          {disponiBi < 0 && (
-            <div style={{marginTop:14,padding:"10px 14px",background:"#7f1d1d55",borderRadius:10,fontSize:13,color:"#fca5a5"}}>
-              ⚠️ Esta quincena no alcanza. Ajusta el ahorro o las cuotas.
-            </div>
-          )}
-          {disponiBi >= 0 && disponiBi < 100000 && (
-            <div style={{marginTop:14,padding:"10px 14px",background:"#78350f55",borderRadius:10,fontSize:13,color:"#fcd34d"}}>
-              ⚠️ Margen muy bajo. Considera reducir el ahorro.
-            </div>
-          )}
-        </div>
-
-        {/* Resumen mensual */}
-        <div style={css.card}>
-          <div style={css.cardLabel}>Resumen mensual (2 quincenas)</div>
-          {[
-            ["Ingresos totales",       fmt(ingresoMes),        "#34d399"],
-            ["Gastos fijos",           `- ${fmt(totalGastos)}`, "#e2e8f0"],
-            ["Cuotas deudas",          `- ${fmt(totalCuotas)}`, "#fca5a5"],
-            ["Ahorro emprendimiento",  `- ${fmt(ahorroMeta*2)}`,"#6ee7b7"],
-          ].map(([l,v,c])=>(
-            <div key={l} style={css.lRow}>
-              <span style={{color:"#94a3b8"}}>{l}</span>
-              <span style={{color:c,fontWeight:600}}>{v}</span>
-            </div>
-          ))}
-          <div style={css.divider}/>
-          <div style={css.lRow}>
-            <span style={{color:"#f8fafc",fontWeight:700,fontSize:15}}>Disponible libre</span>
-            <span style={{fontWeight:800,fontSize:17,color:disponiMes>=0?"#34d399":"#f87171"}}>
-              {disponiMes<0?"- ":""}{fmt(Math.abs(disponiMes))}
-            </span>
+          <div style="text-align:right">
+            <div style="font-size:10px;color:#6366f1;margin-bottom:2px">PENDIENTE</div>
+            <div id="total-pendiente-val" style="font-size:20px;font-weight:800;color:#f87171"></div>
           </div>
         </div>
-      </>}
+      </div>
+    </div>
 
-      {/* ════ GASTOS ════ */}
-      {tab==="gastos" && <>
-        <div style={{...css.card,marginBottom:8}}>
-          <div style={css.cardLabel}>Gastos fijos mensuales</div>
-          <div style={css.sub}>Toca el valor para editarlo</div>
-        </div>
-        {gastos.map(g=>(
-          <div key={g.id} style={css.editRow}>
-            <span style={{color:"#cbd5e1",fontSize:14,flex:1}}>{g.nombre}</span>
-            {editando===`g${g.id}` ? (
-              <input autoFocus type="number" defaultValue={g.monto} style={css.inIn()}
-                onBlur={e=>{ upGasto(g.id,e.target.value); setEditando(null); }}
-                onKeyDown={e=>{ if(e.key==="Enter") e.target.blur(); }}/>
-            ) : (
-              <span style={css.editVal} onClick={()=>setEditando(`g${g.id}`)}>{fmt(g.monto)} ✏️</span>
-            )}
-          </div>
-        ))}
-        <div style={{...css.card,background:"#1e3a2f",border:"1px solid #10b981",textAlign:"right"}}>
-          <div style={{fontSize:11,color:"#6ee7b7",marginBottom:4}}>TOTAL MENSUAL</div>
-          <div style={{fontSize:26,fontWeight:800,color:"#34d399"}}>{fmt(totalGastos)}</div>
-          <div style={{fontSize:12,color:"#6ee7b7"}}>Quincenal: {fmt(totalGastos/2)}</div>
-        </div>
-      </>}
+    <!-- Cuotas -->
+    <div id="deuda-cuotas" class="hidden">
+      <div class="card" style="margin-bottom:8px">
+        <div class="card-label">Cuota mensual por banco</div>
+        <div class="sub-text">Actualiza cuando refinancies con el banco ✏️</div>
+      </div>
+      <div id="cuotas-list"></div>
+      <div class="total-card-red">
+        <div style="font-size:11px;color:#fca5a5;margin-bottom:4px">TOTAL CUOTAS / MES</div>
+        <div id="total-cuotas-val" style="font-size:26px;font-weight:800;color:#f87171"></div>
+        <div id="total-cuotas-bi" style="font-size:12px;color:#fca5a5"></div>
+      </div>
+      <div class="info-card">
+        💡 <strong>Recuerda:</strong> cuando refinancies un banco, actualiza su cuota aquí.
+        El número de ahorro en Resumen se recalcula automáticamente.
+      </div>
+    </div>
+  </div>
 
-      {/* ════ DEUDAS ════ */}
-      {tab==="deudas" && <>
-        <div style={{display:"flex",gap:8,marginBottom:12}}>
-          {[["saldos","📉 Saldos mes a mes"],["cuotas","💸 Cuotas mensuales"]].map(([t,l])=>(
-            <button key={t} style={css.subTab(deudaTab===t)} onClick={()=>setDeudaTab(t)}>{l}</button>
-          ))}
-        </div>
+</div><!-- /app -->
 
-        {deudaTab==="saldos" && <>
-          <div style={{...css.card,marginBottom:8,background:"#1a1033",border:"1px solid #6366f133"}}>
-            <div style={css.cardLabel}>Saldo actual por banco</div>
-            <div style={css.sub}>Actualiza el saldo cada mes para ver tu progreso 📆</div>
-          </div>
-          {deudas.map(d=>{
-            const pp = pct(d.saldoActual, d.saldoInicial);
-            return (
-              <div key={d.id} style={{...css.card,marginBottom:10}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
-                  <div style={css.dot(d.color)}/>
-                  <span style={{color:"#f1f5f9",fontWeight:700,fontSize:15,flex:1}}>{d.nombre}</span>
-                  <span style={{fontSize:12,color:d.color,fontWeight:700,padding:"3px 10px",borderRadius:20,
-                    background:d.color+"22",border:`1px solid ${d.color}44`}}>{pp}% pagado</span>
-                </div>
-                <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
-                  <div>
-                    <div style={{fontSize:10,color:"#64748b",marginBottom:2}}>SALDO INICIAL</div>
-                    <div style={{fontSize:14,color:"#64748b",fontWeight:600}}>{fmt(d.saldoInicial)}</div>
-                  </div>
-                  <div style={{textAlign:"right"}}>
-                    <div style={{fontSize:10,color:"#94a3b8",marginBottom:2}}>SALDO ACTUAL</div>
-                    {editando===`s${d.id}` ? (
-                      <input autoFocus type="number" defaultValue={d.saldoActual} style={css.inIn(d.color)}
-                        onBlur={e=>{ upDeuda(d.id,"saldoActual",e.target.value); setEditando(null); }}
-                        onKeyDown={e=>{ if(e.key==="Enter") e.target.blur(); }}/>
-                    ) : (
-                      <div onClick={()=>setEditando(`s${d.id}`)} style={{fontSize:18,fontWeight:800,color:d.color,
-                        cursor:"pointer",padding:"2px 8px",borderRadius:8,
-                        background:d.color+"11",border:`1px solid ${d.color}33`}}>
-                        {fmt(d.saldoActual)} ✏️
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div style={{height:8,background:"#0f172a",borderRadius:6,overflow:"hidden"}}>
-                  <div style={{height:"100%",width:`${pp}%`,background:d.color,borderRadius:6,transition:"width .6s"}}/>
-                </div>
-                <div style={{display:"flex",justifyContent:"space-between",marginTop:6}}>
-                  <span style={{fontSize:11,color:"#475569"}}>
-                    Pagado: <span style={{color:"#34d399",fontWeight:600}}>{fmt(d.saldoInicial-d.saldoActual)}</span>
-                  </span>
-                  <span style={{fontSize:11,color:"#475569"}}>
-                    Faltan: <span style={{color:d.color,fontWeight:600}}>{fmt(d.saldoActual)}</span>
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-          <div style={{...css.card,background:"#1a1033",border:"1px solid #6366f1",marginTop:4}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-              <div style={{fontSize:11,color:"#818cf8",letterSpacing:1}}>TOTAL DEUDAS</div>
-              <div style={{fontSize:11,color:"#818cf8"}}>{pct(totalSaldoAct,totalSaldoIni)}% pagado</div>
-            </div>
-            <div style={{height:10,ba
+<script>
+// ─── ESTADO ───────────────────────────────────────────────
+const KEY = "cf_data_v2";
+
+const defaultGastos = [
+  {id:1, nombre:"Arriendo + Servicios",   monto:1800000},
+  {id:2, nombre:"Alimentación / Mercado", monto:300000},
+  {id:3, nombre:"Jardín del niño",        monto:500000},
+  {id:4, nombre:"Combustible",            monto:100000},
+  {id:5, nombre:"Rodamiento",             monto:50000},
+  {id:6, nombre:"Plan celulares",         monto:200000},
+];
+
+const defaultDeudas = [
+  {id:1, nombre:"Banco Nu",        cuota:140000, saldoInicial:8900000, saldoActual:8900000, color:"#6366f1"},
+  {id:2, nombre:"Davivienda",      cuota:70000,  saldoInicial:2200000, saldoActual:2200000, color:"#f59e0b"},
+  {id:3, nombre:"Bancolombia",     cuota:80000,  saldoInicial:2000000, saldoActual:2000000, color:"#10b981"},
+  {id:4, nombre:"Sumas Pay",       cuota:100000, saldoInicial:580000,  saldoActual:580000,  color:"#ef4444"},
+  {id:5, nombre:"Banco Occidente", cuota:130000, saldoInicial:5200000, saldoActual:5200000, color:"#8b5cf6"},
+];
+
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){}
+
+let gastos  = saved.gastos  || JSON.parse(JSON.stringify(defaultGastos));
+let deudas  = saved.deudas  || JSON.parse(JSON.stringify(defaultDeudas));
+
+// ─── HELPERS ──────────────────────────────────────────────
+const fmt = n => "$" + Math.round(n).toLocaleString("es-CO");
+const pct = (a,b) => b===0 ? 0 : Math.min(100, Math.round(((b-a)/b)*100));
+const $ = id => document.getElementById(id);
+
+function save(){
+  const q = Number($("quincena").value);
+  const a = Number($("ahorro").value);
+  localStorage.setItem(KEY, JSON.stringify({gastos, deudas, quincena:q, ahorro:a}));
+  $("saved-ok").classList.remove("hidden");
+  setTimeout(() => $("saved-ok").classList.add("hidden"), 1500);
+}
+
+// ─── TABS ─────────────────────────────────────────────────
+let currentTab = "dashboard";
+function switchTab(t){
+  ["dashboard","gastos","deudas"].forEach(x=>{
+    $(`tab-${x}`).classList.toggle("hidden", x!==t);
+  });
+  document.querySelectorAll(".tab-btn").forEach((b,i)=>{
+    b.classList.toggle("active", ["dashboard","gastos","deudas"][i]===t);
+  });
+  currentTab = t;
+  if(t==="gastos") renderGastos();
+  if(t==="deudas") renderDeudas();
+}
+
+let currentDeudaTab = "saldos";
+function switchDeudaTab(t){
+  $("deuda-saldos").classList.toggle("hidden", t!=="saldos");
+  $("deuda-cuotas").classList.toggle("hidden", t!=="cuotas");
+  document.querySelectorAll(".sub-tab-btn").forEach((b,i)=>{
+    b.classList.toggle("active", ["saldos","cuotas"][i]===t);
+  });
+  currentDeudaTab = t;
+}
+
+// ─── RECALC DASHBOARD ─────────────────────────────────────
+function recalc(){
+  const q = Number($("quincena").value) || 0;
+  const a = Number($("ahorro").value)   || 0;
+  const tG = gastos.reduce((s,g)=>s+g.monto,0);
+  const tC = deudas.reduce((s,d)=>s+d.cuota,0);
+  const tSA= deudas.reduce((s,d)=>s+d.saldoActual,0);
+  const tSI= deudas.reduce((s,d)=>s+d.saldoInicial,0);
+  const pagado = tSI - tSA;
+
+  const gBi = tG/2, cBi = tC/2;
+  const dispBi  = q - gBi - cBi - a;
+  const dispMes = q*2 - tG - tC - a*2;
+  const saludP  = q>0 ? Math.min(100,Math.max(0,(dispBi/q)*100)) : 0;
+
+  // Salud badge
+  let sc="#10b981", sl="✅ Saludable";
+  if(saludP<20){sc="#f59e0b"; sl="⚠️ Ajustado";}
+  if(saludP<10){sc="#ef4444"; sl="🔴 Crítico";}
+  const badge=$("salud-badge");
+  badge.textContent=sl;
+  badge.style.background=sc+"22";
+  badge.style.border=`1px solid ${sc}`;
+  badge.style.color=sc;
+
+  // Header
+  $("ingreso-mes").textContent = fmt(q*2);
+
+  // Bar
+  const segs=[
+    {label:"Gastos", val:gBi,             color:"#64748b"},
+    {label:"Deudas", val:cBi,             color:"#ef4444"},
+    {label:"Ahorro", val:a,               color:"#10b981"},
+    {label:"Libre",  val:Math.max(0,dispBi), color:"#3b82f6"},
+  ];
+  const tot = segs.reduce((s,x)=>s+x.val,0)||1;
+  $("bar-wrap").innerHTML = segs.map(sg=>
+    `<div class="bar-seg" style="background:${sg.color};width:${(sg.val/tot)*100}%"></div>`
+  ).join("");
+  $("legend").innerHTML = segs.map(sg=>
+    `<div class="legend-item"><div class="dot" style="background:${sg.color}"></div>${sg.label} <strong>${fmt(sg.val)}</strong></div>`
+  ).join("");
+
+  // Mini cards
+  $("gastos-bi").textContent  = fmt(gBi);
+  $("gastos-mes-sub").textContent = `de ${fmt(tG)}/mes`;
+  $("cuotas-bi").textContent  = fmt(cBi);
+  $("cuotas-mes-sub").textContent = `de ${fmt(tC)}/mes`;
+
+  // Deuda total
+  const pp = pct(tSA, tSI);
+  $("saldo-total-actual").textContent      = fmt(tSA);
+  $("saldo-total-inicial-sub").textContent = `de ${fmt(tSI)} iniciales`;
+  $("pct-pagado-total").textContent        = `${pp}% pagado`;
+  $("total-pagado-sub").textContent        = `ahorrado: ${fmt(pagado)}`;
+  $("progress-total").style.width          = pp+"%";
+
+  // Key number
+  const kc=$("key-card"), kn=$("key-number"), ab=$("alert-box");
+  if(dispBi>0){
+    kc.style.background="#064e3b"; kc.style.border="2px solid #10b981";
+    kn.style.color="#34d399";
+  } else {
+    kc.style.background="#450a0a"; kc.style.border="2px solid #ef4444";
+    kn.style.color="#f87171";
+  }
+  kn.textContent = fmt(Math.abs(dispBi));
+  ab.classList.add("hidden");
+  if(dispBi<0){
+    ab.classList.remove("hidden");
+    ab.style.background="#7f1d1d55"; ab.style.color="#fca5a5";
+    ab.textContent="⚠️ Esta quincena no alcanza. Ajusta el ahorro o las cuotas.";
+  } else if(dispBi<100000){
+    ab.classList.remove("hidden");
+    ab.style.background="#78350f55"; ab.style.color="#fcd34d";
+    ab.textContent="⚠️ Margen muy bajo. Considera reducir el ahorro.";
+  }
+
+  // Resumen
+  $("res-ingresos").textContent = fmt(q*2);
+  $("res-gastos").textContent   = `- ${fmt(tG)}`;
+  $("res-cuotas").textContent   = `- ${fmt(tC)}`;
+  $("res-ahorro").textContent   = `- ${fmt(a*2)}`;
+  $("res-disponible").textContent = (dispMes<0?"- ":"")+fmt(Math.abs(dispMes));
+  $("res-disponible").style.color = dispMes>=0?"#34d399":"#f87171";
+
+  save();
+}
+
+// ─── GASTOS ───────────────────────────────────────────────
+function renderGastos(){
+  const total = gastos.reduce((s,g)=>s+g.monto,0);
+  $("gastos-list").innerHTML = gastos.map(g=>`
+    <div class="edit-row">
+      <span style="color:#cbd5e1;font-size:14px;flex:1">${g.nombre}</span>
+      <span class="edit-val" onclick="editGasto(${g.id})" id="gval-${g.id}">${fmt(g.monto)} ✏️</span>
+    </div>
+  `).join("");
+  $("total-gastos-val").textContent = fmt(total);
+  $("total-gastos-bi").textContent  = `Quincenal: ${fmt(total/2)}`;
+}
+
+function editGasto(id){
+  const g = gastos.find(x=>x.id===id);
+  const el = $(`gval-${id}`);
+  el.outerHTML = `<input class="inline-input" id="ginput-${id}" type="number" value="${g.monto}"
+    onblur="saveGasto(${id})" onkeydown="if(event.key==='Enter')this.blur()"/>`;
+  setTimeout(()=>{ const i=$(`ginput-${id}`); if(i){i.focus();i.select();} },10);
+}
+
+function saveGasto(id){
+  const el = $(`ginput-${id}`);
+  if(!el) return;
+  gastos = gastos.map(g=>g.id===id?{...g,monto:Number(el.value)||0}:g);
+  renderGastos();
+  recalc();
+}
+
+// ─── DEUDAS ───────────────────────────────────────────────
+function renderDeudas(){
+  const tSA = deudas.reduce((s,d)=>s+d.saldoActual,0);
+  const tSI = deudas.reduce((s,d)=>s+d.saldoInicial,0);
+  const tC  = deudas.reduce((s,d)=>s+d.cuota,0);
+  const pag = tSI-tSA;
+  const pp  = pct(tSA,tSI);
+
+  // SALDOS
+  $("saldos-list").innerHTML = deudas.map(d=>{
+    const p=pct(d.saldoActual,d.saldoInicial);
+    return `
+    <div class="debt-card">
+      <div class="debt-header">
+        <div class="dot" style="background:${d.color}"></div>
+        <div class="debt-name">${d.nombre}</div>
+        <div class="debt-pct-badge" style="color:${d.color};background:${d.color}22;border:1px solid ${d.color}44">
+          ${p}% pagado
+        </div>
+      </div>
+      <div class="debt-values">
+        <div>
+          <div class="debt-val-label">SALDO INICIAL</div>
+          <div style="font-size:14px;color:#64748b;font-weight:600">${fmt(d.saldoInicial)}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="debt-val-label" style="color:#94a3b8">SALDO ACTUAL</div>
+          <div class="debt-saldo-btn" id="sval-${d.id}"
+            style="color:${d.color};background:${d.color}11;border:1px solid ${d.color}33"
+            onclick="editSaldo(${d.id})">${fmt(d.saldoActual)} ✏️</div>
+        </div>
+      </div>
+      <div class="debt-progress-wrap">
+        <div class="progress-bar-fill" style="background:${d.color};width:${p}%"></div>
+      </div>
+      <div class="debt-footer">
+        <span>Pagado: <span style="color:#34d399;font-weight:600">${fmt(d.saldoInicial-d.saldoActual)}</span></span>
+        <span>Faltan: <span style="color:${d.color};font-weight:600">${fmt(d.saldoActual)}</span></span>
+      </div>
+    </div>`;
+  }).join("");
+
+  $("pct-total-deuda").textContent   = `${pp}% pagado`;
+  $("progress-total-2").style.width  = pp+"%";
+  $("total-pagado-val").textContent  = fmt(pag);
+  $("total-pendiente-val").textContent = fmt(tSA);
+
+  // CUOTAS
+  $("cuotas-list").innerHTML = deudas.map(d=>`
+    <div class="edit-row">
+      <div class="dot" style="background:${d.color}"></div>
+      <span style="color:#cbd5e1;font-size:14px;flex:1">${d.nombre}</span>
+      <span class="edit-val" id="cval-${d.id}" onclick="editCuota(${d.id})">${fmt(d.cuota)} ✏️</span>
+    </div>
+  `).join("");
+  $("total-cuotas-val").textContent = fmt(tC);
+  $("total-cuotas-bi").textContent  = `Quincenal: ${fmt(tC/2)}`;
+}
+
+function editSaldo(id){
+  const d=deudas.find(x=>x.id===id);
+  const el=$(`sval-${id}`);
+  el.outerHTML=`<input class="inline-input" id="sinput-${id}" type="number" value="${d.saldoActual}"
+    style="color:${d.color}" onblur="saveSaldo(${id})" onkeydown="if(event.key==='Enter')this.blur()"/>`;
+  setTimeout(()=>{ const i=$(`sinput-${id}`); if(i){i.focus();i.select();} },10);
+}
+
+function saveSaldo(id){
+  const el=$(`sinput-${id}`);
+  if(!el) return;
+  deudas=deudas.map(d=>d.id===id?{...d,saldoActual:Number(el.value)||0}:d);
+  renderDeudas();
+  recalc();
+}
+
+function editCuota(id){
+  const d=deudas.find(x=>x.id===id);
+  const el=$(`cval-${id}`);
+  el.outerHTML=`<input class="inline-input" id="cinput-${id}" type="number" value="${d.cuota}"
+    onblur="saveCuota(${id})" onkeydown="if(event.key==='Enter')this.blur()"/>`;
+  setTimeout(()=>{ const i=$(`cinput-${id}`); if(i){i.focus();i.select();} },10);
+}
+
+function saveCuota(id){
+  const el=$(`cinput-${id}`);
+  if(!el) return;
+  deudas=deudas.map(d=>d.id===id?{...d,cuota:Number(el.value)||0}:d);
+  renderDeudas();
+  recalc();
+}
+
+// ─── INIT ─────────────────────────────────────────────────
+window.onload = function(){
+  if(saved.quincena) $("quincena").value = saved.quincena;
+  if(saved.ahorro)   $("ahorro").value   = saved.ahorro;
+  recalc();
+};
+</script>
+</body>
+</html>
